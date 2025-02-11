@@ -17,7 +17,7 @@ sed -i 's/ -dirty//g' kernel_platform/msm-kernel/scripts/setlocalversion
 cd kernel_platform
 curl -LSs "https://raw.githubusercontent.com/5ec1cff/KernelSU/refs/heads/main/kernel/setup.sh" | bash -
 cd KernelSU
-git revert -m 1 3a73585 -n
+git revert -m 1 $(git log --grep="remove devpts hook" --pretty=format:"%h") -n #动态获取commit哈希值以提高兼容性
 KSU_VERSION=$(expr $(/usr/bin/git rev-list --count HEAD) "+" 10200)
 sed -i "s/DKSU_VERSION=16/DKSU_VERSION=${KSU_VERSION}/" kernel/Makefile
 
@@ -46,6 +46,11 @@ patch -p1 -F 3 < 69_hide_stuff.patch
 # Build kernel
 cd "$OLD_DIR"
 ./kernel_platform/oplus/build/oplus_build_kernel.sh ${CPUD} gki
+#./kernel_platform/build_with_bazel.py \
+#            -t pineapple \
+#            gki \
+#构建内核时使用此命令(第49~51行)可缩短构建时间并减少构建的资源需求
+
 
 # Make AnyKernel3
 git clone https://github.com/Kernel-SU/AnyKernel3 --depth=1
