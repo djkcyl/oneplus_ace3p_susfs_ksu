@@ -49,7 +49,7 @@ cd "$OLD_DIR"
 #./kernel_platform/build_with_bazel.py \
 #            -t pineapple \
 #            gki \
-#构建内核时使用此命令(第49~51行)可缩短构建时间并减少构建的资源需求
+#构建内核时使用此命令(第49~51行)代替第48行的命令可缩短构建时间并减少构建的资源需求
 
 
 # Make AnyKernel3
