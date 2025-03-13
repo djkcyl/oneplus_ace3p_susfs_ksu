@@ -23,7 +23,7 @@ sed -i "s/DKSU_VERSION=16/DKSU_VERSION=${KSU_VERSION}/" kernel/Makefile
 # Set up susfs
 cd "$OLD_DIR"
 git clone https://gitlab.com/simonpunk/susfs4ksu.git -b gki-${ANDROID_VERSION}-${KERNEL_VERSION} --depth 1
-git clone https://github.com/TheWildJames/kernel_patches.git --depth 1
+git clone https://github.com/TanakaLun/kernel_patches4mksu --depth 1
 cd kernel_platform
 cp ../susfs4ksu/kernel_patches/KernelSU/10_enable_susfs_for_ksu.patch ./KernelSU/
 cp ../kernel_patches4mksu/mksu/mksu_susfs.patch ./KernelSU/
@@ -53,7 +53,7 @@ cd "$OLD_DIR"
 # Make AnyKernel3
 git clone https://github.com/Kernel-SU/AnyKernel3 --depth=1
 rm -rf ./AnyKernel3/.git
-cp out/dist/Image ./AnyKernel3/
+cp kernel_platform/out/msm-kernel-${CPUD}-gki/dist/Image ./AnyKernel3/
 
 ZIPNAME="Anykernel3-MKSU-SUSFS-${KSU_VERSION}-OnePlus_ACE_3_Pro.zip"
 cd ./AnyKernel3
